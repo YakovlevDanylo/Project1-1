@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLabel, QVBoxLayout, QLineEdit
+from PyQt5.QtWidgets import QPushButton, QLabel, QHBoxLayout, QVBoxLayout, QLineEdit
 
 label1 = QLabel("Введіть запитання:")
 label2 = QLabel("Введіть вірну відповідь:")
@@ -12,3 +12,16 @@ label_line_v1.addWidget(label2)
 label_line_v1.addWidget(label3)
 label_line_v1.addWidget(label4)
 label_line_v1.addWidget(label5)
+
+input1 = QLineEdit()
+input2 = QLineEdit()
+input3 = QLineEdit()
+input4 = QLineEdit()
+input5 = QLineEdit()
+
+input_line_v1 = QVBoxLayout()
+input_line_v1.addWidget(input1)
+input_line_v1.addWidget(input2)
+input_line_v1.addWidget(input3)
+input_line_v1.addWidget(input4)
+input_line_v1.addWidget(input5)
