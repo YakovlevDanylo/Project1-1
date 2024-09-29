@@ -1,0 +1,14 @@
+from PyQt5.QtWidgets import QLabel, QVBoxLayout, QLineEdit
+
+label1 = QLabel("Введіть запитання:")
+label2 = QLabel("Введіть вірну відповідь:")
+label3 = QLabel("Введіть 1 хибну відповідь:")
+label4 = QLabel("Введіть 2 хибну відповідь:")
+label5 = QLabel("Введіть 3 хибну відповідь:")
+
+label_line_v1 = QVBoxLayout()
+label_line_v1.addWidget(label1)
+label_line_v1.addWidget(label2)
+label_line_v1.addWidget(label3)
+label_line_v1.addWidget(label4)
+label_line_v1.addWidget(label5)
