@@ -1,0 +1,8 @@
+questions = [
+    Question("Яблуко", "Apple", "Application"
+             , "Building", "Orange"),
+    Question("Апельсин", "Orange", "Application"
+             , "Building", "Apple"),
+    Question("Авокадо", "Avocado", "Avocadododo"
+             , "Building", "Apple")
+]
