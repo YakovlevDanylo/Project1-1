@@ -1,0 +1,17 @@
+class Question:
+    def __init__(self, question, ans, wrong_ans1, wrong_ans2, wrong_ans3):
+        self.question = question
+        self.ans = ans
+        self.wrong_ans1 = wrong_ans1
+        self.wrong_ans2 = wrong_ans2
+        self.wrong_ans3 = wrong_ans3
+        self.attempts = 0
+        self.correct = 0
+
+    def got_right(self):
+        self.attempts += 1
+        self.correct +=1
+
+    def got_wrong(self):
+        self.attempts += 1
+que
