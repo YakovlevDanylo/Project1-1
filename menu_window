@@ -1,1 +1,47 @@
+from PyQt5.QtWidgets import QLabel, QVBoxLayout, QLineEdit, QHBoxLayout, QPushButton
 
+label1 = QLabel("Введіть запитання:")
+label2 = QLabel("Введіть вірну відповідь:")
+label3 = QLabel("Введіть 1 хибну відповідь:")
+label4 = QLabel("Введіть 2 хибну відповідь:")
+label5 = QLabel("Введіть 3 хибну відповідь:")
+
+label_line_v1 = QVBoxLayout()
+label_line_v1.addWidget(label1)
+label_line_v1.addWidget(label2)
+label_line_v1.addWidget(label3)
+label_line_v1.addWidget(label4)
+label_line_v1.addWidget(label5)
+
+input1 = QLineEdit()
+input2 = QLineEdit()
+input3 = QLineEdit()
+input4 = QLineEdit()
+input5 = QLineEdit()
+
+input_line_v1 = QVBoxLayout()
+input_line_v1.addWidget(input1)
+input_line_v1.addWidget(input2)
+input_line_v1.addWidget(input3)
+input_line_v1.addWidget(input4)
+input_line_v1.addWidget(input5)
+
+line_h1 = QHBoxLayout()
+line_h1.addLayout(label_line_v1)
+line_h1.addLayout(input_line_v1)
+
+add_question_button = QPushButton("Add Question")
+clear_button = QPushButton("Clear")
+
+line_h2 = QHBoxLayout()
+line_h2.addWidget(add_question_button)
+line_h2.addWidget(clear_button)
+
+statistics = QLabel()
+back_button = QPushButton("Back to menu")
+
+menu_window_layout = QVBoxLayout()
+menu_window_layout.addLayout(line_h1)
+menu_window_layout.addLayout(line_h2)
+menu_window_layout.addWidget(statistics)
+menu_window_layout.addWidget(back_button)
