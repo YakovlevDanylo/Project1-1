@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLabel, QVBoxLayout, QLineEdit, QHBoxLayout, QPushButton
+from PyQt5.QtWidgets import QPushButton, QLabel, QHBoxLayout, QVBoxLayout, QLineEdit
 
 label1 = QLabel("Введіть запитання:")
 label2 = QLabel("Введіть вірну відповідь:")
@@ -30,18 +30,18 @@ line_h1 = QHBoxLayout()
 line_h1.addLayout(label_line_v1)
 line_h1.addLayout(input_line_v1)
 
-add_question_button = QPushButton("Add Question")
-clear_button = QPushButton("Clear")
+add_question_button = QPushButton("Додати запитання")
+clear_button = QPushButton("Очистити")
 
-line_h2 = QHBoxLayout()
-line_h2.addWidget(add_question_button)
-line_h2.addWidget(clear_button)
+button_line = QHBoxLayout()
+button_line.addWidget(add_question_button)
+button_line.addWidget(clear_button)
 
 statistics = QLabel()
-back_button = QPushButton("Back to menu")
+back_button = QPushButton("Назад")
 
 menu_window_layout = QVBoxLayout()
 menu_window_layout.addLayout(line_h1)
-menu_window_layout.addLayout(line_h2)
+menu_window_layout.addLayout(button_line)
 menu_window_layout.addWidget(statistics)
 menu_window_layout.addWidget(back_button)
