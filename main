@@ -1,67 +1,135 @@
-from random import shuffle
+from time import sleep
+
 from main_window import *
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import  QWidget
+from random import shuffle, choice
+from question import Question
+from menu_window import *
 
-card_width, card_height = 600, 500
 
-text_wrong = 'Неправильно'
-text_correct = 'Правильно'
-frm_question = 'Яблуко'
-frm_right = 'apple'
-frm_wrong1 = 'application'
-frm_wrong2 = 'building'
-frm_wrong3 = 'caterpillar'
+questions = [
+    Question("Яблуко", "Apple", "Application"
+             , "Building","Orange"),
+    Question("Апельсин", "Orange", "Application"
+             , "Building","Apple"),
+    Question("Авокадо", "Avocado", "Avocadododo"
+             , "Building","Apple")
+]
 
-radio_list = [btn_1, btn_2, btn_3, btn_4]
-shuffle(radio_list)
-answer = radio_list[0]
-wrong_answer1, wrong_answer2, wrong_answer3 = radio_list[1], radio_list[2], radio_list[3]
+
+text_wrong = "Неправильно"
+text_correct = "Правильно"
+
+form_question = ""
+form_right = ""
+form_wrong1 = ""
+form_wrong2 = ""
+form_wrong3 = ""
+
+def new_question():
+    global cur_q
+    global form_question, form_right, form_wrong1, form_wrong2, form_wrong3
+    cur_q = choice(questions)
+    form_question = cur_q.question
+    form_right = cur_q.answer
+    form_wrong1 = cur_q.wrong_answer1
+    form_wrong2 = cur_q.wrong_answer2
+    form_wrong3 = cur_q.wrong_answer3
+
+button_list = [btn_ans1, btn_ans2, btn_ans3, btn_ans4]
+shuffle(button_list)
+right_answer = button_list[0]
+wrong_answer1, wrong_answer2, wrong_answer3 = button_list[1], button_list[2], button_list[3]
+
 def show_data():
-    label_question.setText(frm_question)
-    lb_correct.setText(frm_right)
-    answer.setText(frm_right)
-    wrong_answer1.setText(frm_wrong1)
-    wrong_answer2.setText(frm_wrong2)
-    wrong_answer3.setText(frm_wrong3)
-
+    label_question.setText(form_question)
+    lb_correct.setText(form_right)
+    right_answer.setText(form_right)
+    wrong_answer1.setText(form_wrong1)
+    wrong_answer2.setText(form_wrong2)
+    wrong_answer3.setText(form_wrong3)
 
 def check_result():
-
-    correct = answer.isChecked()
+    correct = right_answer.isChecked()
     if correct:
-
         lb_result.setText(text_correct)
+        cur_q.got_right()
         show_result()
     else:
-        incorrect = wrong_answer1.isChecked() or wrong_answer2.isChecked() or wrong_answer3.isChecked()
+        incorrect = (wrong_answer1.isChecked() or
+                    wrong_answer2.isChecked() or
+                    wrong_answer3.isChecked())
         if incorrect:
-
+            cur_q.got_wrong()
             lb_result.setText(text_wrong)
             show_result()
 
-
-def click_OK():
-    print(1)
-    if btn_ans.text() != 'Наступне питання':
+def answer_button_click():
+    if btn_next.text() != "Наступне питання":
         check_result()
     else:
+        new_question()
+        show_data()
         show_question()
 
+def open_menu():
+    if Question.attempts == 0:
+        count = 0
+    else:
+        count = (Question.correct / Question.attempts) * 100
+
+    result = (f'Разів відповіли: {Question.attempts}\n' \
+           f'Вірних відповідей: {Question.correct}\n' \
+           f'Успішність: {round(count, 2)}%')
+    statistics.setText(result)
+    window.hide()
+    window_menu.show()
+
+def main_window():
+    window_menu.hide()
+    window.show()
+
+def add_question():
+    new_q = Question(input1.text(), input2.text(), input3.text(), input4.text(), input5.text())
+    questions.append(new_q)
 
 
-win_card = QWidget()
-win_card.resize(card_width, card_height)
-win_card.move(300, 300)
-win_card.setWindowTitle('Memory Card')
+def clear():
+    input1.clear()
+    input2.clear()
+    input3.clear()
+    input4.clear()
+    input5.clear()
 
+def rest():
+    time = btn_rest.value() * 60
+    window.hide()
+    sleep(time)
+    window.show()
 
-win_card.setLayout(layout_card)
+window_menu = QWidget()
+window_menu.setLayout(menu_window_layout)
+window_menu.hide()
+back_button.clicked.connect(main_window)
+btn_menu.clicked.connect(open_menu)
+
+card_width, card_height = 600, 500
+
+window = QWidget()
+
+window.resize(card_width, card_height)
+window.move(300, 300)
+window.setWindowTitle("Memory Card")
+
+window.setLayout(layout_card)
+btn_next.clicked.connect(answer_button_click)
+btn_rest.clicked.connect(rest)
+add_question_button.clicked.connect(add_question)
+clear_button.clicked.connect(clear)
+
+new_question()
 show_data()
 show_question()
-btn_ans.clicked.connect(click_OK)
 
-
-win_card.show()
+window.show()
 app.exec_()
-
-
