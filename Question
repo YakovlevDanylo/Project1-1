@@ -1,7 +1,8 @@
 class Question():
     correct = 0
     attempts = 0
-    def __init__(self, question, answer, wrong_answer1, wrong_answer2, wrong_answer3):
+    def __init__(self, question, answer, wrong_answer1,
+                 wrong_answer2, wrong_answer3):
         self.question = question
         self.answer = answer
         self.wrong_answer1 = wrong_answer1
