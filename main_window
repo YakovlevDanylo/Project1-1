@@ -1,53 +1,53 @@
+from PyQt5.QtWidgets import (QPushButton, QLabel, QSpinBox, QRadioButton, QButtonGroup, QGroupBox,
+                             QHBoxLayout, QVBoxLayout, QApplication)
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QPushButton, QSpinBox, QLabel, QButtonGroup, QRadioButton, QGroupBox, \
-    QVBoxLayout, QHBoxLayout
 
 app = QApplication([])
-
-btn_menu = QPushButton("Menu")
-btn_sleep = QPushButton("Rest")
-box_minutes = QSpinBox()
-box_minutes.setValue(30)
-
-btn_ans = QPushButton("ВідповістиS")
+btn_menu = QPushButton("Меню")
+btn_rest = QPushButton("Відпочити")
+btn_next = QPushButton("Відповісти")
+sp_rest = QSpinBox()
+sp_rest.setValue(30)
 label_question = QLabel("Question")
 
-radioGroupBox = QButtonGroup()
+group_box = QGroupBox("Варіанти відповідей")
 
-btn_1 = QRadioButton("")
-btn_2 = QRadioButton("")
-btn_3 = QRadioButton("")
-btn_4 = QRadioButton("")
+rb_group = QButtonGroup()
 
-radioGroupBox.addButton(btn_1)
-radioGroupBox.addButton(btn_2)
-radioGroupBox.addButton(btn_3)
-radioGroupBox.addButton(btn_4)
+btn_ans1 = QRadioButton("1")
+btn_ans2 = QRadioButton("2")
+btn_ans3 = QRadioButton("3")
+btn_ans4 = QRadioButton("4")
+
+rb_group.addButton(btn_ans1)
+rb_group.addButton(btn_ans2)
+rb_group.addButton(btn_ans3)
+rb_group.addButton(btn_ans4)
 
 layout_ans1 = QHBoxLayout()
 layout_ans2 = QVBoxLayout()
 layout_ans3 = QVBoxLayout()
 
-layout_ans2.addWidget(btn_1)
-layout_ans2.addWidget(btn_2)
-layout_ans3.addWidget(btn_3)
-layout_ans3.addWidget(btn_4)
+layout_ans2.addWidget(btn_ans1)
+layout_ans2.addWidget(btn_ans2)
+layout_ans3.addWidget(btn_ans3)
+layout_ans3.addWidget(btn_ans4)
 layout_ans1.addLayout(layout_ans2)
 layout_ans1.addLayout(layout_ans3)
 
-questGroupBox = QGroupBox("Question variation")
-questGroupBox.setLayout(layout_ans1)
+group_box.setLayout(layout_ans1)
 
-ansGroupBox = QGroupBox("Results")
-lb_result = QLabel("")
-lb_correct = QLabel("")
+ans_group_box = QGroupBox("Перевірка результатів")
+
+lb_result = QLabel("Правильно / Помилка")
+lb_correct = QLabel("Тут буде знаходитись текст з правильною відповіддю")
 
 layout_result = QVBoxLayout()
 layout_result.addWidget(lb_result, alignment=(Qt.AlignLeft | Qt.AlignTop))
-layout_result.addWidget(lb_correct, alignment=Qt.AlignCenter)
+layout_result.addWidget(lb_correct, alignment=Qt.AlignHCenter, stretch=2)
 
-ansGroupBox.setLayout(layout_result)
-ansGroupBox.hide()
+ans_group_box.setLayout(layout_result)
+ans_group_box.hide()
 
 layout_line4 = QHBoxLayout()
 layout_line1 = QHBoxLayout()
@@ -56,17 +56,17 @@ layout_line3 = QHBoxLayout()
 
 layout_line1.addWidget(btn_menu)
 layout_line1.addStretch(1)
-layout_line1.addWidget(btn_sleep)
-layout_line1.addWidget(box_minutes)
+layout_line1.addWidget(btn_rest)
+layout_line1.addWidget(sp_rest)
 layout_line1.addWidget(QLabel("Хвилин"))
 
 layout_line2.addWidget(label_question, alignment=(Qt.AlignHCenter | Qt.AlignVCenter))
 
-layout_line3.addWidget(questGroupBox)
-layout_line3.addWidget(ansGroupBox)
+layout_line3.addWidget(group_box)
+layout_line3.addWidget(ans_group_box)
 
 layout_line4.addStretch(1)
-layout_line4.addWidget(btn_ans, stretch=2)
+layout_line4.addWidget(btn_next, stretch=2)
 layout_line4.addStretch(1)
 
 layout_card = QVBoxLayout()
@@ -80,22 +80,20 @@ layout_card.setSpacing(5)
 
 
 def show_result():
-    questGroupBox.hide()
-    ansGroupBox.show()
-    btn_ans.setText("Наступне питання")
+    group_box.hide()
+    ans_group_box.show()
+    btn_next.setText("Наступне питання")
 
 def show_question():
-    ansGroupBox.hide()
-    questGroupBox.show()
-    btn_ans.setText("Відповісти")
-    print(1)
-    radioGroupBox.setExclusive(False)
+    ans_group_box.hide()
+    group_box.show()
+    btn_next.setText("Відповісти")
 
-    btn_1.setChecked(False)
-    btn_2.setChecked(False)
-    btn_3.setChecked(False)
-    btn_4.setChecked(False)
+    rb_group.setExclusive(False)
 
-    radioGroupBox.setExclusive(True)
+    btn_ans1.setChecked(False)
+    btn_ans2.setChecked(False)
+    btn_ans3.setChecked(False)
+    btn_ans4.setChecked(False)
 
-
+    rb_group.setExclusive(True)
